@@ -9,7 +9,7 @@ Public Class Mainform
     End Sub
 
     Private Sub LoadData()
-        Dim connectionString As String = "Data Source=users.db;Version=3;"
+        Dim connectionString As String = "Data Source=users"
         Dim query As String = "SELECT * FROM Tbl_Users"
 
         Try
