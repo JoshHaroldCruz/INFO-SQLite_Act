@@ -8,10 +8,11 @@ Public Class Form1
     Dim isOTPgenerated As Boolean = False
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CenterToScreen()
+        CreateUserTable()
     End Sub
 
     Private Function GetSQLiteConnection() As SQLiteConnection
-        Dim connectionString As String = "Data Source=users.db;Version=3;"
+        Dim connectionString As String = "Data Source=users;"
         Return New SQLiteConnection(connectionString)
     End Function
 
@@ -89,6 +90,7 @@ Public Class Form1
                 Using cmd As New SQLiteCommand(SQL, con)
                     cmd.ExecuteNonQuery()
                 End Using
+                con.Close()
                 MessageBox.Show("User table created successfully or already exists.")
             End Using
         Catch ex As Exception
@@ -141,7 +143,6 @@ Public Class Form1
 
                 If Not IsEmailRegistered(email) Then
                     If IsPasswordStrong(password) Then
-                        CreateUserTable()
                         Dim insertquery As String = "INSERT INTO Tbl_Users (Email, Password, RegDate, RegTime) VALUES('" & email & "', '" & password & "', '" & regDate & "', '" & regTime & "')"
 
                         Try
