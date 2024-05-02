@@ -51,6 +51,7 @@ Public Class Form1
                 Using cmd As New SQLiteCommand(query, con)
                     count = Convert.ToInt32(cmd.ExecuteScalar())
                 End Using
+                con.Close()
             End Using
         Catch ex As Exception
             MessageBox.Show("Error checking email registration: " & ex.Message)
@@ -113,6 +114,7 @@ Public Class Form1
                         Using cmd As New SQLiteCommand(query, con)
                             count = Convert.ToInt32(cmd.ExecuteScalar())
                         End Using
+                        con.Close()
                     End Using
                     If count > 0 Then
                         Mainform.Show()
